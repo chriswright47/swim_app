@@ -1,6 +1,6 @@
-== Swim App
+= Swim App
 
-= This app is designed to facilitate managing swimmers' times and entries for swim meets. It is designed for high school swim meets where no heat sheets are available, but can also be used for club swim meets if desired.
+== This app is designed to facilitate managing swimmers' times and entries for swim meets. It is designed for high school swim meets where no heat sheets are available, but can also be used for club swim meets if desired.
 
 The idea of the app is to make it easier for coaches and athletes to keep track of who is swimming what in swim meets where entries are changing up to the last minute.
 
