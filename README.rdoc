@@ -1,28 +1,7 @@
-== README
+== Swim App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+= This app is designed to facilitate managing swimmers' times and entries for swim meets. It is designed for high school swim meets where no heat sheets are available, but can also be used for club swim meets if desired.
 
-Things you may want to cover:
+The idea of the app is to make it easier for coaches and athletes to keep track of who is swimming what in swim meets where entries are changing up to the last minute.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Contact Chris Wright at chris.wright4747@gmail.com or tweet @chris_wright_47
