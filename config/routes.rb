@@ -1,4 +1,18 @@
 SwimApp::Application.routes.draw do
+
+  root 'static_pages#home'
+
+  resources :users, except: [:index]
+  resources :teams
+
+  get '/signin' => 'sessions#new', as: 'new_session'
+  post '/signin' => 'sessions#create'
+  get '/logout' => 'sessions#destroy', as: 'logout'
+
+  get '/help' => 'static_pages#help'
+  get '/about' => 'static_pages#about'
+  get '/contact' => 'static_pages#contact'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
