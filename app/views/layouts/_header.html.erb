@@ -8,7 +8,7 @@
     <% if current_user %>
       <%= menu_item "Log Out", logout_path %>
     <% else %>
-      <%= menu_item "Sign In", new_session_path %>
+      <%= menu_item "Sign In", signin_path %>
       <%= menu_item "Sign Up", new_user_path %>
     <% end %>
   <% end %>
