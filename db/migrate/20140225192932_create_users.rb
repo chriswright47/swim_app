@@ -5,8 +5,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :password_digest
-      t.boolean :admin
-      t.boolean :coach
+      t.boolean :admin, default: false
+      t.boolean :coach, default: false
       t.integer :team_id
 
       t.timestamps
