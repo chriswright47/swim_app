@@ -9,18 +9,18 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @teams = Team.select(:id, :name).map {|t| [t.name, t.id] }
   end
 
   def create
     @user = User.new(user_params)
-    @user.team = Team.find_by_id(params[:team_id])
-    if @user.save
+    team = Team.find_by_id(params[:team_id])
+    if @user.save && team
+      team.users << @user
       flash[:success] = 'Account created successfully'
       sign_in(@user)
       redirect_to user_path(@user)
     else
-      flash[:error] = 'Account was not created successfully'
+      flash[:error] = 'Account was not created successfully, be sure to select a team'
       render 'new'
     end
   end

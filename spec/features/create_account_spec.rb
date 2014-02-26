@@ -49,14 +49,20 @@ describe 'Create Account' do
 
     describe 'with valid data' do
       it 'creates a new user account' do
+        team = FactoryGirl.create(:team)
+        visit new_user_path
         fill_in 'First name', with: user.first_name
         fill_in 'Last name', with: user.last_name
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
         fill_in 'Confirm Password', with: user.password_confirmation
-        expect{ click_button 'Create My Account' }.to change(User, :count).by(1)
+        select team.name, from: 'Team'
+        click_button 'Create My Account'
+        created_user = User.find_by_email(user.email)
+        expect(page).to have_content('Account created successfully')
         expect(page).to have_content(user.full_name)
         expect(page).to have_link('Log Out')
+        expect(created_user.team).to eq team
       end
     end
   end
