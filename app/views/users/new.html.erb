@@ -1,0 +1,12 @@
+<div class='text-center'>
+  <%= form_for(@user) do |f| %>
+    <%= render partial: 'fields', locals: {f: f} %>
+    <%= label_tag :team_id %>
+    <%= select_tag :team_id, options_for_select(possible_team_options), prompt: 'Select a team' %>
+    <br>
+    <br>
+    <div>
+      <%= f.submit 'Create my Account', class: 'btn btn-large, btn-primary' %>
+    </div>
+  <% end %>
+</div>
