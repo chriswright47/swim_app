@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     team = Team.find_by_id(params[:team_id])
     @user.team = team
-    if @user.save && team
+    if @user.save
       flash[:success] = 'Account created successfully'
       sign_in(@user)
       redirect_to user_path(@user)

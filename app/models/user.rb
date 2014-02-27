@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,6}\z/, message: "not a valid email address"}
+  validates :team_id, presence: true
 
   def full_name
     self.first_name + ' ' + self.last_name
