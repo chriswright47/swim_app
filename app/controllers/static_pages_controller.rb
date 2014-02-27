@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if signed_in?
-      redirect_to team_path(current_user.team)
+      redirect_to user_path(current_user)
     end
   end
 

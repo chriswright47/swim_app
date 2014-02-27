@@ -7,5 +7,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@factory.com" }
     password 'password'
     password_confirmation 'password'
+    association :team
   end
 end

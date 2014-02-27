@@ -5,7 +5,7 @@ SwimApp::Application.routes.draw do
   resources :users, except: [:index]
   resources :teams
 
-  get '/signin' => 'sessions#new', as: 'new_session'
+  get '/signin' => 'sessions#new', as: 'signin'
   post '/signin' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: 'logout'
 
