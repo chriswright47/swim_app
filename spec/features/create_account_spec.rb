@@ -13,7 +13,8 @@ describe 'Create Account' do
   end
 
   describe 'creating new user' do
-    let(:user) { FactoryGirl.build(:user) }
+    let(:team) { FactoryGirl.create(:team) }
+    let(:user) { FactoryGirl.build(:user, team: team) }
 
     describe 'with invalid data' do
       it 'does not create user with no data' do
@@ -49,7 +50,7 @@ describe 'Create Account' do
 
     describe 'with valid data' do
       it 'creates a new user account' do
-        team = FactoryGirl.create(:team)
+        team
         visit new_user_path
         fill_in 'First name', with: user.first_name
         fill_in 'Last name', with: user.last_name
@@ -57,12 +58,7 @@ describe 'Create Account' do
         fill_in 'Password', with: user.password
         fill_in 'Confirm Password', with: user.password_confirmation
         select team.name, from: 'Team'
-        click_button 'Create My Account'
-        created_user = User.find_by_email(user.email)
-        expect(page).to have_content('Account created successfully')
-        expect(page).to have_content(user.full_name)
-        expect(page).to have_link('Log Out')
-        expect(created_user.team).to eq team
+        expect{click_button 'Create My Account'}.to change(User, :count).by(1)
       end
     end
   end
