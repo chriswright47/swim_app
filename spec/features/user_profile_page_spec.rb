@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Profile Page' do
   let(:user) { FactoryGirl.create(:user, team: team) }
   let(:team) { FactoryGirl.create(:team) }
+  let(:admin) { FactoryGirl.create(:user, admin: true) }
 
   describe 'for non-signed in user' do
     before do
@@ -11,15 +12,12 @@ describe 'Profile Page' do
     end
 
     it 'redirects to signin path' do
-      expect(page.current_url).to eq signin_url
+      expect(page.current_path).to eq signin_path
     end
   end
 
   describe 'for signed-in user', type: :request do
-    before do
-      user.team = team
-      sign_in user
-    end
+    before { sign_in user }
 
     it 'allows you to see your own profile' do
       visit user_path(user)
@@ -43,5 +41,14 @@ describe 'Profile Page' do
       visit user_path(other_athlete)
       expect(page).to have_content(user.full_name)
     end
+  end
+
+  describe 'for a signed in admin', type: :request do
+    before { sign_in admin }
+    it 'lets admin see users profile page' do
+      visit user_path(user)
+      expect(page).to have_content(user.full_name)
+    end
+
   end
 end

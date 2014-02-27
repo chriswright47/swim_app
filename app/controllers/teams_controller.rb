@@ -25,4 +25,9 @@ class TeamsController < ApplicationController
   def destroy
   end
 
+  private
+    def correct_team_user
+      redirect_to root_path unless current_user.team == Team.find_by_id(params[:id]) || current_user.admin?
+    end
+
 end

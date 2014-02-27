@@ -1,0 +1,18 @@
+<div class='text-center'>
+  <h3>Edit Account for <%= @user.full_name %></h3>
+  <p class='lead'>(leave password fields blank if you do not wish to change)</p>
+  <%= form_for(@user) do |f| %>
+    <%= render partial: 'fields', locals: {f: f} %>
+    <%= label_tag :team_id %>
+    <%= select_tag :team_id, options_for_select(possible_team_options), prompt: 'Select a team' %>
+    <br>
+    <br>
+    <div>
+      <%= f.submit 'Update Account', class: 'btn btn-large btn-primary' %>
+    </div>
+  <% end %>
+  <div>
+    <%= link_to 'Cancel Changes', root_path, class: 'btn btn-large btn-danger' %>
+  </div>
+
+</div>

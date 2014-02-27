@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     team = Team.find_by_id(params[:team_id])
+    @user.team = team
     if @user.save && team
-      team.users << @user
       flash[:success] = 'Account created successfully'
       sign_in(@user)
       redirect_to user_path(@user)
@@ -28,9 +28,22 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    team = Team.find_by_id(params[:team_id])
+    @user.update_attributes(user_params)
+    if @user.valid?
+      @user.team = team if team
+      flash[:success] = 'Account updated successfully'
+      sign_in(@user)
+      redirect_to user_path(@user)
+    else
+      flash[:error] = 'There were errors in updating, please try again'
+      render 'edit'
+    end
   end
 
   def destroy
@@ -42,7 +55,10 @@ class UsersController < ApplicationController
     end
 
     def teammate_user
-      redirect_to root_path unless current_user.team == User.find(params[:id]).team
+      redirect_to root_path unless current_user.team == User.find(params[:id]).team || current_user.admin?
     end
 
+    def correct_user
+      redirect_to root_path unless current_user?(User.find(params[:id])) || current_user.admin?
+    end
 end

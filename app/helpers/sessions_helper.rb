@@ -35,11 +35,7 @@ module SessionsHelper
   end
 
   def coach_user
-    redirect_to root_path unless current_user.coach?
-  end
-
-  def correct_team_user
-    redirect_to root_path unless current_user.team == Team.find_by_id(params[:id])
+    redirect_to root_path unless current_user.coach? || current_user.admin?
   end
 
 end
