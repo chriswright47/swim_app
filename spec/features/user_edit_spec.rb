@@ -64,11 +64,35 @@ describe 'Edit User' do
     end
   end
 
-  describe 'when an admin is signed in' do
-    it 'lets admin see edit form' do
+  describe 'when an admin is signed in', type: :request do
+    let(:admin) { FactoryGirl.create(:user, admin: true) }
+    before do
+      sign_in admin
+      visit edit_user_path(user)
     end
 
-    it 'lets admin update a users info' do
+    it 'lets admin see edit form' do
+      expect(page.current_path).to eq edit_user_path(user)
+      expect(page).to have_content(user.full_name)
+      expect(page).to have_button('Update Account')
+    end
+
+    describe 'updating user info' do
+      let(:admin_first) { 'adminFirst'}
+      let(:admin_last) { 'adminLast'}
+      let(:admin_email) { 'admin@email.com'}
+      before do
+        fill_in 'First name', with: admin_first
+        fill_in 'Last name', with: admin_last
+        fill_in 'Email', with: admin_email
+        click_button 'Update Account'
+      end
+
+      it 'should save the changes' do
+        expect(user.reload.first_name).to eq admin_first
+        expect(user.reload.last_name).to eq admin_last
+        expect(user.reload.email).to eq admin_email
+      end
     end
   end
 end
