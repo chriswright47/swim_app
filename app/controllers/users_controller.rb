@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :signed_in?, except: [:new, :create]
+  before_filter :signed_in_user, except: [:new, :create]
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: [:destroy]
+  before_filter :teammate_user, only: [:show]
+
 
   def show
     @user = User.find(params[:id])
@@ -39,13 +41,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
-    def correct_user
-      user = User.find_by_id(params[:id])
-      redirect_to root_path unless current_user?(user)
-    end
-
-    def admin_user
-      redirect_to root_path unless current_user.admin?
+    def teammate_user
+      redirect_to root_path unless current_user.team == User.find(params[:id]).team
     end
 
 end

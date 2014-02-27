@@ -26,4 +26,20 @@ module SessionsHelper
     current_user == user
   end
 
+  def signed_in_user
+    redirect_to signin_path unless current_user
+  end
+
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
+
+  def coach_user
+    redirect_to root_path unless current_user.coach?
+  end
+
+  def correct_team_user
+    redirect_to root_path unless current_user.team == Team.find_by_id(params[:id])
+  end
+
 end
