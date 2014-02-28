@@ -27,12 +27,14 @@ describe 'Profile Page' do
     it 'is your home page' do
       visit root_path
       expect(page).to have_content(user.full_name)
+      expect(page).to have_link('Edit My Account', href: edit_user_path(user))
     end
 
     it 'allows you to see other people on your own team' do
       teammate = FactoryGirl.create(:user, team: team)
       visit user_path(teammate)
       expect(page).to have_content(teammate.full_name)
+      expect(page).to have_link('Edit My Account', href: edit_user_path(user))
     end
 
     it 'does not allow you to see other teams athletes profile pages' do

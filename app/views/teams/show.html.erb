@@ -1,0 +1,15 @@
+<h1><%= @team.name %> <%= @team.mascot %></h1>
+
+<p class='lead'>Athletes</p>
+<ul class='list-unstyled athlete-list'>
+  <% @team.athletes.order(:last_name).each do |athlete| %>
+    <li><%= link_to athlete.full_name, user_path(athlete) %></li>
+  <% end %>
+</ul>
+
+<p class='lead'>Coaches</p>
+<ul class='coach-list'>
+  <% @team.coaches.order(:last_name).each do |coach| %>
+    <li><%= link_to coach.full_name, user_path(coach) %></li>
+  <% end %>
+</ul>
