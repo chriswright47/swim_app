@@ -2,7 +2,7 @@
   <%= menu_group do %>
     <% if current_user %>
       <% team = current_user.team %>
-      <%= menu_item team.name + ' ' + team.mascot, team_path(team) %>
+      <%= menu_item team.full_name, team_path(team) %>
       <%= menu_item "My Profile", root_path %>
     <% end %>
     <%= menu_item "About", about_path %>
