@@ -3,7 +3,7 @@
     <% if current_user %>
       <% team = current_user.team %>
       <%= menu_item team.full_name, team_path(team) %>
-      <%= menu_item "My Profile", root_path %>
+      <%= menu_item "My Profile", user_path(current_user) %>
     <% end %>
     <%= menu_item "About", about_path %>
     <%= menu_item "Contact", contact_path %>
